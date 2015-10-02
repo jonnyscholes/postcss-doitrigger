@@ -1,0 +1,10 @@
+.foo {
+  color: tomato;
+  font-size: 12px;
+  align-content: center;
+  opacity: 1;
+}
+
+.bar .baz {
+  color: hotpink;
+}
