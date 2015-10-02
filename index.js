@@ -3,6 +3,7 @@ var triggers = require('./triggers.json');
 
 module.exports = postcss.plugin('doitrigger', function (opts) {
     opts = opts || {};
+    opts.whitelist = opts.whitelist || [];
 
     return function (css, result) {
         var report = [];
