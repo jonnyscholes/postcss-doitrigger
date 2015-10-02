@@ -8,16 +8,18 @@ module.exports = postcss.plugin('doitrigger', function (opts) {
         var report = [];
 
         css.nodes.forEach(function (rule) {
-            rule.nodes.forEach(function (declaration) {
-                if (triggers[declaration.prop]) {
-                    report.push({
-                        selector: rule.selector,
-                        property: declaration.prop,
-                        location: declaration.source.start,
-                        changes:  triggers[declaration.prop]
-                    });
-                }
-            });
+            if (rule.nodes) {
+                rule.nodes.forEach(function (declaration) {
+                    if (triggers[declaration.prop] && opts.whitelist.indexOf(declaration.prop) === -1) {
+                        report.push({
+                            selector: rule.selector,
+                            property: declaration.prop,
+                            location: declaration.source.start,
+                            changes:  triggers[declaration.prop]
+                        });
+                    }
+                });
+            }
         });
 
         if (result && result.messages) {

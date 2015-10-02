@@ -12,7 +12,7 @@ var doitrigger = require('postcss-doitrigger');
 
 var css = fs.readFileSync('./styles.css', 'utf8');
 postcss()
-  .use(doitrigger())
+  .use(doitrigger({whitelist: 'font-size', 'color'}))
   .process(css)
   .then(function (result) {
     result.messages.forEach(function (message) {
@@ -20,3 +20,7 @@ postcss()
     })
 });
 ```
+
+## Options
+
+- `whitelist` - An array of css declarations that will not be reported on.
